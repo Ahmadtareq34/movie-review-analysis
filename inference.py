@@ -21,10 +21,22 @@ emotion_id2label = {
 }
 
 # =========================================================
-# MODEL PATHS
+# MODEL SOURCES
+# Use environment variables if provided.
+# Otherwise fall back to your Hugging Face repos.
 # =========================================================
-SENTIMENT_MODEL_PATH = os.getenv("SENTIMENT_MODEL_PATH", "./sentiment_model")
-EMOTION_MODEL_PATH = os.getenv("EMOTION_MODEL_PATH", "./emotion_model")
+SENTIMENT_MODEL_PATH = os.getenv(
+    "SENTIMENT_MODEL_PATH",
+    "Ahmadtareq34/sentiment-model"
+)
+
+EMOTION_MODEL_PATH = os.getenv(
+    "EMOTION_MODEL_PATH",
+    "Ahmadtareq34/emotion-model"
+)
+
+# Optional custom cache directory
+HF_CACHE_DIR = os.getenv("HF_HOME", None)
 
 # =========================================================
 # DEVICE SETUP
@@ -35,14 +47,26 @@ device = torch.device("cpu")
 # LOAD MODELS AND TOKENIZERS
 # =========================================================
 print(f"Loading sentiment model from: {SENTIMENT_MODEL_PATH}")
-sentiment_tokenizer = AutoTokenizer.from_pretrained(SENTIMENT_MODEL_PATH)
-sentiment_model = AutoModelForSequenceClassification.from_pretrained(SENTIMENT_MODEL_PATH)
+sentiment_tokenizer = AutoTokenizer.from_pretrained(
+    SENTIMENT_MODEL_PATH,
+    cache_dir=HF_CACHE_DIR
+)
+sentiment_model = AutoModelForSequenceClassification.from_pretrained(
+    SENTIMENT_MODEL_PATH,
+    cache_dir=HF_CACHE_DIR
+)
 sentiment_model.to(device)
 sentiment_model.eval()
 
 print(f"Loading emotion model from: {EMOTION_MODEL_PATH}")
-emotion_tokenizer = AutoTokenizer.from_pretrained(EMOTION_MODEL_PATH)
-emotion_model = AutoModelForSequenceClassification.from_pretrained(EMOTION_MODEL_PATH)
+emotion_tokenizer = AutoTokenizer.from_pretrained(
+    EMOTION_MODEL_PATH,
+    cache_dir=HF_CACHE_DIR
+)
+emotion_model = AutoModelForSequenceClassification.from_pretrained(
+    EMOTION_MODEL_PATH,
+    cache_dir=HF_CACHE_DIR
+)
 emotion_model.to(device)
 emotion_model.eval()
 
@@ -122,7 +146,7 @@ def predict_sentiment_and_emotion(text):
     secondary_emotions = get_secondary_emotions(
         emotion_probabilities=emotion_probs,
         primary_emotion=emotion_label,
-        threshold=0.25
+        threshold=0.15
     )
 
     return {
