@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Review Analysis</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <img src="/static/logo.png" alt="Logo" class="hero-logo" />
+      </section>
+
+      <section class="main-card">
+        <h1>Movie Review Sentiment & Emotion Analysis</h1>
+        <p class="subtitle">
+          Paste a movie review below to analyze its sentiment and emotional
+          tone.
+        </p>
+
+        <textarea
+          id="reviewText"
+          placeholder="Write or paste a movie review here..."
+        ></textarea>
+
+        <button id="analyzeBtn">Analyze Review</button>
+
+        <p id="errorMessage" class="error-message"></p>
+      </section>
+
+      <section id="resultSection" class="results hidden">
+        <div class="result-card">
+          <h2>Sentiment Result</h2>
+          <div class="badge-row">
+            <span id="sentimentBadge" class="badge"></span>
+          </div>
+          <p class="confidence-line">
+            Confidence: <span id="sentimentConfidence"></span>
+          </p>
+        </div>
+
+        <div class="result-card">
+          <h2>Primary Emotion</h2>
+          <div class="badge-row">
+            <span id="emotionBadge" class="badge"></span>
+          </div>
+          <p class="confidence-line">
+            Confidence: <span id="emotionConfidence"></span>
+          </p>
+        </div>
+
+        <div class="result-card full-width">
+          <h2>Additional Emotions</h2>
+          <div id="secondaryEmotions" class="badge-row"></div>
+          <p id="noSecondaryEmotion" class="muted-text hidden">
+            No additional emotions above the confidence threshold.
+          </p>
+        </div>
+
+        <div class="result-card full-width">
+          <h2>Submitted Review</h2>
+          <p id="submittedText" class="submitted-text"></p>
+        </div>
+      </section>
+    </main>
+
+    <script src="/static/script.js"></script>
+  </body>
+</html>

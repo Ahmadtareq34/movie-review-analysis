@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+torch
+transformers
+numpy
+pydantic
+safetensors
+jinja2
+python-multipart
+accelerate
