@@ -22,11 +22,17 @@
         <textarea
           id="reviewText"
           placeholder="Write or paste a movie review here..."
+          minlength="10"
+          maxlength="1000"
         ></textarea>
+
+        <div class="input-meta">
+          <small id="charCount">0 / 1000 characters</small>
+        </div>
 
         <button id="analyzeBtn">Analyze Review</button>
 
-        <p id="errorMessage" class="error-message"></p>
+        <p id="errorMessage" class="error-message hidden"></p>
       </section>
 
       <section id="resultSection" class="results hidden">
